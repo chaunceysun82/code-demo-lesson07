@@ -270,21 +270,21 @@ def test_append_content_in_br():
         br.append("some content")
 
 
-# ########
-# # Step 6
-# ########
+########
+# Step 6
+########
 
 
-# def test_anchor():
-#     a = A("http://google.com", "link to google")
-#     file_contents = render_result(a)
-#     print(file_contents)
-#     assert file_contents.startswith('<a ')
+def test_anchor():
+    a = A("http://google.com", "link to google")
+    file_contents = render_result(a)
+    print(file_contents)
+    assert file_contents.startswith('<a ')
 
 
-# ########
-# # Step 7
-# ########
+########
+# Step 7
+########
 
 
 # def test_li():
