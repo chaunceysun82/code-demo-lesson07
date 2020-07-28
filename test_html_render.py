@@ -181,7 +181,203 @@ def test_sub_element():
 # Step 3
 ########
 
-# Add your tests here!
+def test_head():
+    e = Head("this is some text")
+    e.append("and this is some more text")
+
+    file_contents = render_result(e).strip()
+
+    assert ("this is some text") in file_contents
+    assert ("and this is some more text") in file_contents
+
+    assert file_contents.startswith("<head>")
+    assert file_contents.endswith("</head>")
+
+
+def test_title():
+    e = Title("this is some text")
+
+    file_contents = render_result(e).strip()
+
+    assert("this is some text") in file_contents
+    print(file_contents)
+    assert file_contents.startswith("<title>")
+    assert file_contents.endswith("</title>")
+    assert "\n" not in file_contents
+
+
+def test_one_line_tag_append():
+    e = OneLineTag("the initial content")
+    with pytest.raises(NotImplementedError):
+        e.append("some more content")
+
+# ########
+# # Step 4
+# ########
+
+
+# def test_p_attributes():
+#     e = P("A paragraph of text", style="text-align: center", id="intro")
+
+#     file_contents = render_result(e).strip()
+#     print(file_contents)
+
+#     assert "A paragraph of text" in file_contents
+#     assert file_contents.startswith("<p")
+#     assert 'style="text-align: center"' in file_contents
+#     assert 'id="intro''' in file_contents
+#     assert file_contents.startswith("<p ")
+#     assert file_contents[:-1].index(">") > file_contents.index('id="intro"')
+#     assert file_contents[:file_contents.index(">")].count(" ") == 3
+
+
+# ########
+# # Step 5
+# ########
+
+
+# def test_hr():
+#     """a simple horizontal rule with no attributes"""
+#     hr = Hr()
+#     file_contents = render_result(hr)
+#     print(file_contents)
+#     assert file_contents == '<hr />\n'
+
+
+# def test_hr_attr():
+#     """a horizontal rule with an attribute"""
+#     hr = Hr(width=400)
+#     file_contents = render_result(hr)
+#     print(file_contents)
+#     assert file_contents == '<hr width="400" />\n'
+
+
+# def test_br():
+#     br = Br()
+#     file_contents = render_result(br)
+#     print(file_contents)
+#     assert file_contents == "<br />\n"
+
+
+# def test_content_in_br():
+#     with pytest.raises(TypeError):
+#         br = Br("some content")
+
+
+# def test_append_content_in_br():
+#     with pytest.raises(TypeError):
+#         br = Br()
+#         br.append("some content")
+
+
+# ########
+# # Step 6
+# ########
+
+
+# def test_anchor():
+#     a = A("http://google.com", "link to google")
+#     file_contents = render_result(a)
+#     print(file_contents)
+#     assert file_contents.startswith('<a ')
+
+
+# ########
+# # Step 7
+# ########
+
+
+# def test_li():
+#     e = Li("this is some text")
+#     e.append("and this is some more text")
+
+#     file_contents = render_result(e).strip()
+
+#     assert("this is some text") in file_contents
+#     assert("and this is some more text") in file_contents
+
+#     assert file_contents.startswith("<li>")
+#     assert file_contents.endswith("</li>")
+
+
+# def test_li_attributes():
+#     e = Li("A paragraph of text", style="text-align: center", id="intro")
+
+#     file_contents = render_result(e).strip()
+#     print(file_contents)
+
+#     assert "A paragraph of text" in file_contents
+#     assert file_contents.startswith("<li")
+#     assert 'style="text-align: center"' in file_contents
+#     assert 'id="intro''' in file_contents
+#     assert file_contents.startswith("<li ")
+#     assert file_contents[:-1].index(">") > file_contents.index('id="intro"')
+#     assert file_contents[:file_contents.index(">")].count(" ") == 3
+
+
+# def test_ul():
+#     e = Ul("this is some text")
+#     e.append("and this is some more text")
+
+#     file_contents = render_result(e).strip()
+
+#     assert("this is some text") in file_contents
+#     assert("and this is some more text") in file_contents
+
+#     assert file_contents.startswith("<ul>")
+#     assert file_contents.endswith("</ul>")
+
+
+# def test_ul_attributes():
+#     e = Ul("A paragraph of text", style="text-align: center", id="intro")
+
+#     file_contents = render_result(e).strip()
+#     print(file_contents)
+
+#     assert "A paragraph of text" in file_contents
+#     assert file_contents.startswith("<ul")
+#     assert 'style="text-align: center"' in file_contents
+#     assert 'id="intro''' in file_contents
+#     assert file_contents.startswith("<ul ")
+#     assert file_contents[:-1].index(">") > file_contents.index('id="intro"')
+#     assert file_contents[:file_contents.index(">")].count(" ") == 3
+
+
+# def test_h():
+#     h2 = H(2, "PythonClass - Class 6 example")
+
+#     file_contents = render_result(h2).strip()
+#     print(file_contents)
+
+#     assert file_contents.startswith('<h2')
+#     assert("PythonClass - Class 6 example") in file_contents
+
+
+# def test_meta():
+#     e = Meta(charset="UTF-8")
+
+#     file_contents = render_result(e).strip()
+#     assert file_contents.startswith('<meta')
+#     assert (file_contents) == '<meta charset="UTF-8" />'
+
+
+# ########
+# # Step 8
+# ########
+
+
+# def test_html2():
+#     e = Html("this is some text")
+#     e.append("and this is some more text")
+
+#     file_contents = render_result(e).strip()
+
+#     assert("this is some text") in file_contents
+#     assert("and this is some more text") in file_contents
+#     print(file_contents)
+#     assert file_contents.endswith("</html>")
+#     assert file_contents.startswith("<!DOCTYPE html>")
+
 
 # #####################
 # # indentation testing
