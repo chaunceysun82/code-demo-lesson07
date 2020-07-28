@@ -31,6 +31,9 @@ class Element(object):
         else:
             return "<{}>".format(self.tag)
 
+    def _close_tag(self):
+        return "</{}>".format(self.tag)
+
     def render(self, out_file):
 
         out_file.write(self._open_tag())
@@ -41,7 +44,7 @@ class Element(object):
             except AttributeError:
                 out_file.write(content)
                 out_file.write("\n")
-        out_file.write("</{}>".format(self.tag))
+        out_file.write(self._close_tag())
         out_file.write("\n")
 
 
@@ -80,3 +83,27 @@ class Title(OneLineTag):
 
     tag = "title"
 
+
+class SelfClosingTag(Element):
+
+    def render(self, out_file):
+        tag = self._open_tag()[:-1] + " />\n"   #  need a space before />
+        out_file.write(tag)
+
+
+class Hr(SelfClosingTag):
+
+    tag = "hr"
+
+
+class Br(SelfClosingTag):
+
+    tag = "br"
+
+    def __init__(self, content=None, **kwargs):
+        if content is not None:
+            raise TypeError("SelfClosingTag can not contain any content")
+        super().__init__(content, **kwargs)
+
+    def append(self, *args):
+        raise TypeError("You can not add content to a SelfClosingTag")
