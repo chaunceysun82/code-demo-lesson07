@@ -50,7 +50,12 @@ class Element(object):
 
 class Html(Element):
 
-    tag = "html"
+    doc = "<!DOCTYPE html>"
+
+    def render(self, out_file):
+        out_file.write(self.doc)
+        out_file.write("\n")
+        Element.render(self, out_file)
 
 
 class Body(Element):

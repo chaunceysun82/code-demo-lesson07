@@ -361,22 +361,22 @@ def test_meta():
     assert (file_contents) == '<meta charset="UTF-8" />'
 
 
-# ########
-# # Step 8
-# ########
+########
+# Step 8
+########
 
 
-# def test_html2():
-#     e = Html("this is some text")
-#     e.append("and this is some more text")
+def test_html2():
+    e = Html("this is some text")
+    e.append("and this is some more text")
 
-#     file_contents = render_result(e).strip()
+    file_contents = render_result(e).strip()
 
-#     assert("this is some text") in file_contents
-#     assert("and this is some more text") in file_contents
-#     print(file_contents)
-#     assert file_contents.endswith("</html>")
-#     assert file_contents.startswith("<!DOCTYPE html>")
+    assert("this is some text") in file_contents
+    assert("and this is some more text") in file_contents
+    print(file_contents)
+    assert file_contents.endswith("</html>")
+    assert file_contents.startswith("<!DOCTYPE html>")
 
 
 # #####################
