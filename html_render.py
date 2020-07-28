@@ -23,7 +23,26 @@ class Element(object):
         out_file.write("<{}>".format(self.tag))
         out_file.write("\n")
         for content in self.contents:
-            out_file.write(content)
-            out_file.write("\n")
+            try:
+                content.render(out_file)
+            except AttributeError:
+                out_file.write(content)
+        out_file.write("\n")
         out_file.write("</{}>".format(self.tag))
         out_file.write("\n")
+
+
+class Html(Element):
+
+    tag = "html"
+
+
+class Body(Element):
+
+    tag = "body"
+
+
+class P(Element):
+
+    tag = "p"
+
