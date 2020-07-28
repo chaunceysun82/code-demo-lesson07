@@ -10,24 +10,37 @@ class Element(object):
 
     tag = "html"
 
-    def __init__(self, content=None):
+    def __init__(self, content=None, **kwargs):
         if content is None:
             self.contents = []
         else:
             self.contents = [content]
+        self.attribute = kwargs
 
     def append(self, new_content):
         self.contents.append(new_content)
 
+    def _open_tag(self):
+        if self.attribute:
+            open_tag = ["<{} ".format(self.tag)]
+            for key, value in self.attribute.items():
+                open_tag.append(f'{key}="{value}" ')    # make sure "" on the {value}, add space after {value}
+            open_tag[-1] = open_tag[-1][:-1]    #  remove last space
+            open_tag.append(">")
+            return "".join(open_tag)
+        else:
+            return "<{}>".format(self.tag)
+
     def render(self, out_file):
-        out_file.write("<{}>".format(self.tag))
+
+        out_file.write(self._open_tag())
         out_file.write("\n")
         for content in self.contents:
             try:
                 content.render(out_file)
             except AttributeError:
                 out_file.write(content)
-        out_file.write("\n")
+                out_file.write("\n")
         out_file.write("</{}>".format(self.tag))
         out_file.write("\n")
 

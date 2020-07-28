@@ -211,24 +211,24 @@ def test_one_line_tag_append():
     with pytest.raises(NotImplementedError):
         e.append("some more content")
 
-# ########
-# # Step 4
-# ########
+########
+# Step 4
+########
 
 
-# def test_p_attributes():
-#     e = P("A paragraph of text", style="text-align: center", id="intro")
+def test_p_attributes():
+    e = P("A paragraph of text", style="text-align: center", id="intro")
 
-#     file_contents = render_result(e).strip()
-#     print(file_contents)
+    file_contents = render_result(e).strip()
+    print(file_contents)
 
-#     assert "A paragraph of text" in file_contents
-#     assert file_contents.startswith("<p")
-#     assert 'style="text-align: center"' in file_contents
-#     assert 'id="intro''' in file_contents
-#     assert file_contents.startswith("<p ")
-#     assert file_contents[:-1].index(">") > file_contents.index('id="intro"')
-#     assert file_contents[:file_contents.index(">")].count(" ") == 3
+    assert "A paragraph of text" in file_contents
+    assert file_contents.startswith("<p")
+    assert 'style="text-align: center"' in file_contents
+    assert 'id="intro''' in file_contents
+    assert file_contents.startswith("<p ")
+    assert file_contents[:-1].index(">") > file_contents.index('id="intro"')
+    assert file_contents[:file_contents.index(">")].count(" ") == 3
 
 
 # ########
