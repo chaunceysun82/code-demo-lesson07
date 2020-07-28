@@ -287,78 +287,78 @@ def test_anchor():
 ########
 
 
-# def test_li():
-#     e = Li("this is some text")
-#     e.append("and this is some more text")
+def test_li():
+    e = Li("this is some text")
+    e.append("and this is some more text")
 
-#     file_contents = render_result(e).strip()
+    file_contents = render_result(e).strip()
 
-#     assert("this is some text") in file_contents
-#     assert("and this is some more text") in file_contents
+    assert("this is some text") in file_contents
+    assert("and this is some more text") in file_contents
 
-#     assert file_contents.startswith("<li>")
-#     assert file_contents.endswith("</li>")
-
-
-# def test_li_attributes():
-#     e = Li("A paragraph of text", style="text-align: center", id="intro")
-
-#     file_contents = render_result(e).strip()
-#     print(file_contents)
-
-#     assert "A paragraph of text" in file_contents
-#     assert file_contents.startswith("<li")
-#     assert 'style="text-align: center"' in file_contents
-#     assert 'id="intro''' in file_contents
-#     assert file_contents.startswith("<li ")
-#     assert file_contents[:-1].index(">") > file_contents.index('id="intro"')
-#     assert file_contents[:file_contents.index(">")].count(" ") == 3
+    assert file_contents.startswith("<li>")
+    assert file_contents.endswith("</li>")
 
 
-# def test_ul():
-#     e = Ul("this is some text")
-#     e.append("and this is some more text")
+def test_li_attributes():
+    e = Li("A paragraph of text", style="text-align: center", id="intro")
 
-#     file_contents = render_result(e).strip()
+    file_contents = render_result(e).strip()
+    print(file_contents)
 
-#     assert("this is some text") in file_contents
-#     assert("and this is some more text") in file_contents
-
-#     assert file_contents.startswith("<ul>")
-#     assert file_contents.endswith("</ul>")
-
-
-# def test_ul_attributes():
-#     e = Ul("A paragraph of text", style="text-align: center", id="intro")
-
-#     file_contents = render_result(e).strip()
-#     print(file_contents)
-
-#     assert "A paragraph of text" in file_contents
-#     assert file_contents.startswith("<ul")
-#     assert 'style="text-align: center"' in file_contents
-#     assert 'id="intro''' in file_contents
-#     assert file_contents.startswith("<ul ")
-#     assert file_contents[:-1].index(">") > file_contents.index('id="intro"')
-#     assert file_contents[:file_contents.index(">")].count(" ") == 3
+    assert "A paragraph of text" in file_contents
+    assert file_contents.startswith("<li")
+    assert 'style="text-align: center"' in file_contents
+    assert 'id="intro''' in file_contents
+    assert file_contents.startswith("<li ")
+    assert file_contents[:-1].index(">") > file_contents.index('id="intro"')
+    assert file_contents[:file_contents.index(">")].count(" ") == 3
 
 
-# def test_h():
-#     h2 = H(2, "PythonClass - Class 6 example")
+def test_ul():
+    e = Ul("this is some text")
+    e.append("and this is some more text")
 
-#     file_contents = render_result(h2).strip()
-#     print(file_contents)
+    file_contents = render_result(e).strip()
 
-#     assert file_contents.startswith('<h2')
-#     assert("PythonClass - Class 6 example") in file_contents
+    assert("this is some text") in file_contents
+    assert("and this is some more text") in file_contents
+
+    assert file_contents.startswith("<ul>")
+    assert file_contents.endswith("</ul>")
 
 
-# def test_meta():
-#     e = Meta(charset="UTF-8")
+def test_ul_attributes():
+    e = Ul("A paragraph of text", style="text-align: center", id="intro")
 
-#     file_contents = render_result(e).strip()
-#     assert file_contents.startswith('<meta')
-#     assert (file_contents) == '<meta charset="UTF-8" />'
+    file_contents = render_result(e).strip()
+    print(file_contents)
+
+    assert "A paragraph of text" in file_contents
+    assert file_contents.startswith("<ul")
+    assert 'style="text-align: center"' in file_contents
+    assert 'id="intro''' in file_contents
+    assert file_contents.startswith("<ul ")
+    assert file_contents[:-1].index(">") > file_contents.index('id="intro"')
+    assert file_contents[:file_contents.index(">")].count(" ") == 3
+
+
+def test_h():
+    h2 = H(2, "PythonClass - Class 6 example")
+
+    file_contents = render_result(h2).strip()
+    print(file_contents)
+
+    assert file_contents.startswith('<h2')
+    assert("PythonClass - Class 6 example") in file_contents
+
+
+def test_meta():
+    e = Meta(charset="UTF-8")
+
+    file_contents = render_result(e).strip()
+    assert file_contents.startswith('<meta')
+    assert (file_contents) == '<meta charset="UTF-8" />'
 
 
 # ########
