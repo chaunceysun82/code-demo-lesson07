@@ -4,18 +4,23 @@
 A class-based system for rendering html.
 """
 
+#pylint: disable=C0115  # missing class doc string
+
+
 
 # This is the framework for the base class
 class Element(object):
 
     tag = "html"
+    indent = " " * 4    # spaces between levels
 
-    def __init__(self, content=None, **kwargs):
+    def __init__(self, content=None, ind="", **kwargs):
         if content is None:
             self.contents = []
         else:
             self.contents = [content]
         self.attribute = kwargs
+        self.cur_ind = self.indent + ind
 
     def append(self, new_content):
         self.contents.append(new_content)
@@ -28,34 +33,33 @@ class Element(object):
             open_tag[-1] = open_tag[-1][:-1]    #  remove last space
             open_tag.append(">")
             return "".join(open_tag)
-        else:
-            return "<{}>".format(self.tag)
+        return "<{}>".format(self.tag)
 
     def _close_tag(self):
         return "</{}>".format(self.tag)
 
-    def render(self, out_file):
-
-        out_file.write(self._open_tag())
+    def render(self, out_file, cur_ind=""):
+        out_file.write(self.cur_ind + self._open_tag())
         out_file.write("\n")
         for content in self.contents:
             try:
                 content.render(out_file)
             except AttributeError:
-                out_file.write(content)
+                out_file.write(self.cur_ind + self.indent + content)
                 out_file.write("\n")
-        out_file.write(self._close_tag())
+        out_file.write(self.cur_ind + self._close_tag())
         out_file.write("\n")
 
 
 class Html(Element):
 
     doc = "<!DOCTYPE html>"
+    indent = ""
 
-    def render(self, out_file):
+    def render(self, out_file, cur_ind=""):
         out_file.write(self.doc)
         out_file.write("\n")
-        Element.render(self, out_file)
+        Element.render(self, out_file, cur_ind="\b"*4)
 
 
 class Body(Element):
@@ -75,8 +79,8 @@ class Head(Element):
 
 class OneLineTag(Element):
 
-    def render(self, out_file):
-        out_file.write(self._open_tag())
+    def render(self, out_file, cur_ind=""):
+        out_file.write(self.cur_ind + self._open_tag())
         out_file.write(self.contents[0])
         out_file.write(self._close_tag())
         out_file.write("\n")
@@ -92,9 +96,9 @@ class Title(OneLineTag):
 
 class SelfClosingTag(Element):
 
-    def render(self, out_file):
+    def render(self, out_file, cur_ind=""):
         tag = self._open_tag()[:-1] + " />\n"   #  need a space before />
-        out_file.write(tag)
+        out_file.write(self.cur_ind + tag)
 
 
 class Hr(SelfClosingTag):
@@ -106,7 +110,7 @@ class Br(SelfClosingTag):
 
     tag = "br"
 
-    def __init__(self, content=None, **kwargs):
+    def __init__(self, content=None, cur_ind="", **kwargs):
         if content is not None:
             raise TypeError("SelfClosingTag can not contain any content")
         super().__init__(content, **kwargs)
@@ -119,7 +123,7 @@ class A(OneLineTag):
 
     tag = "a"
 
-    def __init__(self, link, content=None, **kwargs):
+    def __init__(self, link, content=None, cur_ind="", **kwargs):
         kwargs['href'] = link
         super().__init__(content, **kwargs)
 
@@ -136,8 +140,8 @@ class Li(Element):
 
 class H(OneLineTag):
 
-    def __init__(self, level, content=None, **kwargs):
-        super().__init__(content, **kwargs)
+    def __init__(self, level, content=None, cur_ind="", **kwargs):
+        super().__init__(content, cur_ind="", **kwargs)
         self.level = level
         self.tag = 'h' + str(self.level)
 

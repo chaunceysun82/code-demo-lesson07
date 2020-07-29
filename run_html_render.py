@@ -197,22 +197,24 @@ page.append(body)
 
 render_page(page, "test_html_output7.html")
 
-# Step 8 and 9
+
+
+# Step 8
 ##############
-print("--------------------Step 8~9--------------------")
+print("--------------------Step 8--------------------")
 
 page = hr.Html()
 
 
 head = hr.Head()
-head.append( hr.Meta(charset="UTF-8") )
+head.append(hr.Meta(charset="UTF-8"))
 head.append(hr.Title("PythonClass = Revision 1087:"))
 
 page.append(head)
 
 body = hr.Body()
 
-body.append( hr.H(2, "PythonClass - Example") )
+body.append(hr.H(2, "PythonClass - Example"))
 
 body.append(hr.P("Here is a paragraph of text -- there could be more of them, "
                  "but this is enough  to show that we can do some text",
@@ -222,12 +224,53 @@ body.append(hr.Hr())
 
 list = hr.Ul(id="TheList", style="line-height:200%")
 
-list.append( hr.Li("The first item in a list") )
-list.append( hr.Li("This is the second item", style="color: red") )
+list.append(hr.Li("The first item in a list"))
+list.append(hr.Li("This is the second item", style="color: red"))
 
 item = hr.Li()
 item.append("And this is a ")
-item.append( hr.A("http://google.com", "link") )
+item.append(hr.A("http://google.com", "link"))
+item.append("to google")
+
+list.append(item)
+
+body.append(list)
+
+page.append(body)
+
+render_page(page, "test_html_output8.html")
+
+
+# Step 9
+##############
+print("--------------------Step 9--------------------")
+
+page = hr.Html()
+
+
+head = hr.Head(ind="")
+head.append(hr.Meta(ind=" " * 4, charset="UTF-8"))
+head.append(hr.Title("PythonClass = Revision 1087:", ind=" " * 4))
+
+page.append(head)
+
+body = hr.Body(ind="")
+
+body.append(hr.H(2, "PythonClass - Example", ind=" " * 4))
+
+body.append(hr.P("Here is a paragraph of text -- there could be more of them, "
+                 "but this is enough  to show that we can do some text", ind=" " * 4, style="text-align: center; font-style: oblique;"))
+
+body.append(hr.Hr(ind=" " * 4))
+
+list = hr.Ul(ind=" " * 4, id="TheList", style="line-height:200%")
+
+list.append(hr.Li("The first item in a list", ind=" " * 8))
+list.append(hr.Li("This is the second item", ind=" " * 8, style="color: red"))
+
+item = hr.Li(ind=" " * 8)
+item.append("And this is a ")
+item.append(hr.A("http://google.com", "link", ind=" " * 12))
 item.append("to google")
 
 list.append(item)
